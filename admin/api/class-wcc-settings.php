@@ -15,11 +15,48 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 			}
 		}
 
+		public function wcc_options_check( string $id ): string {
+			$options = get_option( 'wcc_settings_fields' );
+
+			return ( ! empty( $options[ $id ] ) ? $options[ $id ] : '' );
+		}
+
 		public function wcc_register_submenu_page() {
-			add_submenu_page( 'woocommerce', 'WooCommerce Conditions', 'WooCommerce Conditions', 'manage_options', 'woocommerce-conditions', array(
-				$this,
-				'wcc_register_submenu_page_callback'
-			) );
+			add_menu_page(
+				__( 'WooCommerce Conditions', 'wcc' ),
+				__( 'WooCommerce Conditions', 'wcc' ),
+				'manage_options',
+				'woocommerce-conditions',
+				array( $this, 'wcc_register_submenu_page_callback' ),
+				'dashicons-schedule'
+			);
+
+			add_submenu_page(
+				'woocommerce-conditions',
+				__( 'Visibility', 'wcc' ),
+				__( 'Visibility', 'wcc' ),
+				'manage_options',
+				'woocommerce-conditions',
+				array( $this, 'wcc_register_submenu_page_callback' )
+			);
+
+			add_submenu_page(
+				'woocommerce-conditions',
+				__( 'Strings', 'wcc' ),
+				__( 'Strings', 'wcc' ),
+				'manage_options',
+				'woocommerce-conditions-strings',
+				array( $this, 'wcc_register_submenu_page_string_callback' )
+			);
+
+			add_submenu_page(
+				'woocommerce-conditions',
+				__( 'Documentation', 'wcc' ),
+				__( 'Documentation', 'wcc' ),
+				'manage_options',
+				'woocommerce-conditions-documentation',
+				array( $this, 'wcc_register_submenu_page_documentation_callback' )
+			);
 		}
 
 		protected function wcc_settings_fields( string $type, string $id, string $class, string $name, string $value, $placeholder = '', $description = '', $min = '', $max = '', $required = '' ) {
@@ -63,7 +100,15 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
             <h2 class="nav-tab-wrapper">
                 <a href="?page=woocommerce-conditions" class="nav-tab <?php if ( $active_tab == 'woocommerce-conditions' ) {
 					echo 'nav-tab-active';
-				} ?> "><?php _e( 'General', 'wcc' ); ?></a>
+				} ?> "><?php _e( 'Visibility', 'wcc' ); ?></a>
+
+                <a href="?page=woocommerce-conditions-strings" class="nav-tab <?php if ( $active_tab == 'woocommerce-conditions-strings' ) {
+					echo 'nav-tab-active';
+				} ?> "><?php _e( 'Strings', 'wcc' ); ?></a>
+
+                <a href="?page=woocommerce-conditions-documentation" class="nav-tab <?php if ( $active_tab == 'woocommerce-conditions-documentation' ) {
+					echo 'nav-tab-active';
+				} ?> "><?php _e( 'Documentation', 'wcc' ); ?></a>
             </h2>
 			<?php
 
@@ -82,7 +127,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 		public function wcc_register_submenu_page_callback() {
 			?>
             <div id="agy-wrap" class="wrap">
-                <?php $this->wcc_is_active( 'woocommerce-conditions', 'woocommerce-conditions', '' ); ?>
+				<?php $this->wcc_is_active( 'woocommerce-conditions', 'woocommerce-conditions', 'woocommerce-conditions-strings' ); ?>
                 <form action="options.php" method="post">
 
 					<?php
@@ -112,30 +157,125 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 			<?php
 		}
 
+		public function wcc_register_submenu_page_string_callback() {
+			?>
+            <div id="agy-wrap" class="wrap">
+				<?php $this->wcc_is_active( 'woocommerce-conditions-strings', 'woocommerce-conditions-strings', 'woocommerce-conditions-documentation' ); ?>
+                <form action="options.php" method="post">
+
+					<?php
+					settings_errors( 'wcc_settings_fields' );
+//					wp_nonce_field( 'wcc_dashboard_save', 'wcc_form_save_name' );
+					settings_fields( 'wcc_settings_fields' );
+					do_settings_sections( 'wcc_settings_section_two' );
+
+					submit_button(
+						__( 'Save Changes', 'wcc' ),
+						'',
+						'wcc_save_changes_btn',
+						true,
+						array( 'id' => 'wcc-save-changes-btn' )
+					);
+					?>
+
+                </form>
+
+				<?php
+//				if ( ! isset( $_POST['wcc_form_save_name'] ) ||
+//				     ! wp_verify_nonce( $_POST['wcc_form_save_name'], 'wcc_dashboard_save' ) ) {
+//					return;
+//				}
+				?>
+            </div>
+			<?php
+		}
+
+		public function wcc_register_submenu_page_documentation_callback() {
+			?>
+            <div id="agy-wrap" class="wrap">
+				<?php $this->wcc_is_active( 'woocommerce-conditions-documentation', 'woocommerce-conditions-documentation', '' ); ?>
+                <form action="options.php" method="post">
+
+					<?php
+					settings_errors( 'wcc_settings_fields' );
+//					wp_nonce_field( 'wcc_dashboard_save', 'wcc_form_save_name' );
+					settings_fields( 'wcc_settings_fields' );
+					do_settings_sections( 'wcc_settings_section_three' );
+
+					submit_button(
+						__( 'Save Changes', 'wcc' ),
+						'',
+						'wcc_save_changes_btn',
+						true,
+						array( 'id' => 'wcc-save-changes-btn' )
+					);
+					?>
+
+                </form>
+
+				<?php
+//				if ( ! isset( $_POST['wcc_form_save_name'] ) ||
+//				     ! wp_verify_nonce( $_POST['wcc_form_save_name'], 'wcc_dashboard_save' ) ) {
+//					return;
+//				}
+				?>
+            </div>
+			<?php
+		}
+
 		public function wcc_register_settings() {
 
 			register_setting( 'wcc_settings_fields', 'wcc_settings_fields', 'wcc_sanitize_callback' );
 
 			// Adding sections
-			add_settings_section( 'wcc_section_id', __( 'General', 'wcc' ), array(
+			add_settings_section( 'wcc_section_id', __( 'Visibility', 'wcc' ), array(
 				$this,
 				'wcc_settings_section_callback'
 			), 'wcc_settings_section_one' );
 
-			// General page fields
-			add_settings_field( 'wcc_section_id_enabled_disabled', __( 'Enable / Disable', 'wcc' ), array(
+			add_settings_section( 'wcc_section_id', __( 'Strings', 'wcc' ), array(
 				$this,
-				'wcc_section_id_enabled_disabled'
+				'wcc_settings_section_strings_callback'
+			), 'wcc_settings_section_two' );
+
+			add_settings_section( 'wcc_section_id', __( 'Documentation', 'wcc' ), array(
+				$this,
+				'wcc_settings_section_documentation_callback'
+			), 'wcc_settings_section_three' );
+
+			// Visibility page fields
+			add_settings_field( 'wcc_section_id_card_button_archive', __( 'Hide Add to Card button - Archive page', 'wcc' ), array(
+				$this,
+				'wcc_section_id_card_button_archive'
+			), 'wcc_settings_section_one', 'wcc_section_id' );
+
+			add_settings_field( 'wcc_section_id_card_button_single', __( 'Hide Add to Card button - Single product page', 'wcc' ), array(
+				$this,
+				'wcc_section_id_card_button_single'
 			), 'wcc_settings_section_one', 'wcc_section_id' );
 		}
 
 		public function wcc_settings_section_callback() {
 			// CHANGE DESCRIPTION LATER
-			_e( 'Set your General settings.', 'wcc' );
+			_e( 'Add or remove specific functionality from WooCommerce.', 'wcc' );
 		}
 
-		public function wcc_section_id_enabled_disabled() {
-			$this->wcc_settings_fields( 'checkbox', 'wcc-enabled-disabled', 'wcc-switch-input', 'enabled_disabled', $this->wcc_option_check_radio_btn( 'enabled_disabled' ) );
+		public function wcc_settings_section_strings_callback() {
+			// CHANGE DESCRIPTION LATER
+			_e( 'Strings.', 'wcc' );
+		}
+
+		public function wcc_settings_section_documentation_callback() {
+			// CHANGE DESCRIPTION LATER
+			_e( 'Documentation.', 'wcc' );
+		}
+
+		public function wcc_section_id_card_button_archive() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-card-button-archive', 'wcc-switch-input', 'card_button_archive', $this->wcc_option_check_radio_btn( 'card_button_archive' ) );
+		}
+
+		public function wcc_section_id_card_button_single() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-card-button-single', 'wcc-switch-input', 'card_button_single', $this->wcc_option_check_radio_btn( 'card_button_single' ) );
 		}
 	}
 
