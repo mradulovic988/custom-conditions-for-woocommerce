@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Check if WooCommerce is active
+ * Run plugin settings if WooCommerce is active
  */
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	if ( ! class_exists( 'WooCommerce_Conditions' ) ) {
@@ -66,6 +66,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}
 
 			/**
+             * Add settings link on plugins page
+             *
 			 * @param $links
 			 * @param $file
 			 *
@@ -85,7 +87,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 		new WooCommerce_Conditions();
 	}
-} else {
+}
+
+// If WooCommerce is not active
+if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	function wcc_check_plugin() {
 		add_action( 'admin_notices', 'wcc_admin_notice' );
 		deactivate_plugins( plugin_basename( __FILE__ ) );
@@ -96,12 +101,9 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	}
 	add_action( 'admin_init', 'wcc_check_plugin' );
 
-	function wcc_admin_notice() {
-		?>
+	function wcc_admin_notice() { ?>
         <div class="notice notice-error">
             <p><?php _e( 'WooCommerce Conditions requires WooCommerce to run. Please install and activate WooCommerce.', 'wcc' ) ?></p>
         </div>
-		<?php
-
-	}
+	<?php }
 }

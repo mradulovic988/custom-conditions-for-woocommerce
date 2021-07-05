@@ -135,6 +135,9 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 					wp_nonce_field( 'wcc_dashboard_save', 'wcc_form_save_name' );
 					settings_fields( 'wcc_settings_fields' );
 					do_settings_sections( 'wcc_settings_section_one' );
+					do_settings_sections( 'wcc_settings_section_product_prices' );
+					do_settings_sections( 'wcc_settings_section_coupon' );
+					do_settings_sections( 'wcc_settings_section_description_tabs' );
 
 					submit_button(
 						__( 'Save Changes', 'wcc' ),
@@ -165,7 +168,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 
 					<?php
 					settings_errors( 'wcc_settings_fields' );
-//					wp_nonce_field( 'wcc_dashboard_save', 'wcc_form_save_name' );
+					//					wp_nonce_field( 'wcc_dashboard_save', 'wcc_form_save_name' );
 					settings_fields( 'wcc_settings_fields' );
 					do_settings_sections( 'wcc_settings_section_two' );
 
@@ -179,13 +182,6 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 					?>
 
                 </form>
-
-				<?php
-//				if ( ! isset( $_POST['wcc_form_save_name'] ) ||
-//				     ! wp_verify_nonce( $_POST['wcc_form_save_name'], 'wcc_dashboard_save' ) ) {
-//					return;
-//				}
-				?>
             </div>
 			<?php
 		}
@@ -198,7 +194,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 
 					<?php
 					settings_errors( 'wcc_settings_fields' );
-//					wp_nonce_field( 'wcc_dashboard_save', 'wcc_form_save_name' );
+					//					wp_nonce_field( 'wcc_dashboard_save', 'wcc_form_save_name' );
 					settings_fields( 'wcc_settings_fields' );
 					do_settings_sections( 'wcc_settings_section_three' );
 
@@ -212,13 +208,6 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 					?>
 
                 </form>
-
-				<?php
-//				if ( ! isset( $_POST['wcc_form_save_name'] ) ||
-//				     ! wp_verify_nonce( $_POST['wcc_form_save_name'], 'wcc_dashboard_save' ) ) {
-//					return;
-//				}
-				?>
             </div>
 			<?php
 		}
@@ -228,10 +217,25 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 			register_setting( 'wcc_settings_fields', 'wcc_settings_fields', 'wcc_sanitize_callback' );
 
 			// Adding sections
-			add_settings_section( 'wcc_section_id', __( 'Visibility', 'wcc' ), array(
+			add_settings_section( 'wcc_section_id', __( 'Add to Cart button', 'wcc' ), array(
 				$this,
 				'wcc_settings_section_callback'
 			), 'wcc_settings_section_one' );
+
+			add_settings_section( 'wcc_section_id', __( 'Product prices', 'wcc' ), array(
+				$this,
+				'wcc_settings_section_callback_product_prices'
+			), 'wcc_settings_section_product_prices' );
+
+			add_settings_section( 'wcc_section_id', __( 'Coupon Code', 'wcc' ), array(
+				$this,
+				'wcc_settings_section_callback_coupon'
+			), 'wcc_settings_section_coupon' );
+
+			add_settings_section( 'wcc_section_id', __( 'Description tabs', 'wcc' ), array(
+				$this,
+				'wcc_settings_section_callback_description_tabs'
+			), 'wcc_settings_section_description_tabs' );
 
 			add_settings_section( 'wcc_section_id', __( 'Strings', 'wcc' ), array(
 				$this,
@@ -243,7 +247,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 				'wcc_settings_section_documentation_callback'
 			), 'wcc_settings_section_three' );
 
-			// Visibility page fields
+			// Add to cart fields
 			add_settings_field( 'wcc_section_id_card_button_archive', __( 'Hide Add to Card button - Archive (Shop) page', 'wcc' ), array(
 				$this,
 				'wcc_section_id_card_button_archive'
@@ -258,11 +262,70 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 				$this,
 				'wcc_section_id_card_button_category'
 			), 'wcc_settings_section_one', 'wcc_section_id' );
+
+			// Product prices fields
+			add_settings_field( 'wcc_section_id_prices_all', __( 'Hide All Product prices', 'wcc' ), array(
+				$this,
+				'wcc_section_id_prices_all'
+			), 'wcc_settings_section_product_prices', 'wcc_section_id' );
+
+			add_settings_field( 'wcc_section_id_prices_archive', __( 'Hide Product prices - Archive (Shop) page', 'wcc' ), array(
+				$this,
+				'wcc_section_id_prices_archive'
+			), 'wcc_settings_section_product_prices', 'wcc_section_id' );
+
+			add_settings_field( 'wcc_section_id_prices_category', __( 'Hide Product prices - Category product page', 'wcc' ), array(
+				$this,
+				'wcc_section_id_prices_category'
+			), 'wcc_settings_section_product_prices', 'wcc_section_id' );
+
+			// Coupon Code fields
+			add_settings_field( 'wcc_section_id_coupon_checkout', __( 'Hide Coupon Code - Checkout page', 'wcc' ), array(
+				$this,
+				'wcc_section_id_coupon_checkout'
+			), 'wcc_settings_section_coupon', 'wcc_section_id' );
+
+			add_settings_field( 'wcc_section_id_coupon_cart', __( 'Hide Coupon Code - Cart page', 'wcc' ), array(
+				$this,
+				'wcc_section_id_coupon_cart'
+			), 'wcc_settings_section_coupon', 'wcc_section_id' );
+
+			// Description tabs
+			add_settings_field( 'wcc_section_id_description_tab', __( 'Hide Description Tab', 'wcc' ), array(
+				$this,
+				'wcc_section_id_description_tab'
+			), 'wcc_settings_section_description_tabs', 'wcc_section_id' );
+
+			add_settings_field( 'wcc_section_id_review_tab', __( 'Hide Reviews Tab', 'wcc' ), array(
+				$this,
+				'wcc_section_id_review_tab'
+			), 'wcc_settings_section_description_tabs', 'wcc_section_id' );
+
+			add_settings_field( 'wcc_section_id_additional_info_tab', __( 'Hide Additional Information Tab', 'wcc' ), array(
+				$this,
+				'wcc_section_id_additional_info_tab'
+			), 'wcc_settings_section_description_tabs', 'wcc_section_id' );
+
 		}
 
 		public function wcc_settings_section_callback() {
-			// CHANGE DESCRIPTION LATER
-			_e( 'Add or remove specific functionality from WooCommerce.', 'wcc' );
+			_e( 'Manage visibility for Add to Cart button.', 'wcc' );
+			echo '<hr>';
+		}
+
+		public function wcc_settings_section_callback_product_prices() {
+			_e( 'Manage visibility for Product prices.', 'wcc' );
+			echo '<hr>';
+		}
+
+		public function wcc_settings_section_callback_coupon() {
+			_e( 'Manage visibility for Coupon code.', 'wcc' );
+			echo '<hr>';
+		}
+
+		public function wcc_settings_section_callback_description_tabs() {
+			_e( 'Manage visibility for Description tabs.', 'wcc' );
+			echo '<hr>';
 		}
 
 		public function wcc_settings_section_strings_callback() {
@@ -276,7 +339,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 		}
 
 		public function wcc_section_id_card_button_archive() {
-			$this->wcc_settings_fields( 'checkbox', 'wcc-card-button-archive', 'wcc-switch-input', 'card_button_archive', $this->wcc_option_check_radio_btn( 'card_button_archive' ), '', '' );
+			$this->wcc_settings_fields( 'checkbox', 'wcc-card-button-archive', 'wcc-switch-input', 'card_button_archive', $this->wcc_option_check_radio_btn( 'card_button_archive' ) );
 		}
 
 		public function wcc_section_id_card_button_single() {
@@ -286,6 +349,39 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 		public function wcc_section_id_card_button_category() {
 			$this->wcc_settings_fields( 'checkbox', 'wcc-card-button-category', 'wcc-switch-input', 'card_button_category', $this->wcc_option_check_radio_btn( 'card_button_category' ) );
 		}
+
+		public function wcc_section_id_prices_all() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-prices-all', 'wcc-switch-input', 'prices_all', $this->wcc_option_check_radio_btn( 'prices_all' ) );
+		}
+
+		public function wcc_section_id_prices_archive() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-prices-archive', 'wcc-switch-input', 'prices_archive', $this->wcc_option_check_radio_btn( 'prices_archive' ) );
+		}
+
+		public function wcc_section_id_prices_category() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-prices-category', 'wcc-switch-input', 'prices_category', $this->wcc_option_check_radio_btn( 'prices_category' ) );
+		}
+
+		public function wcc_section_id_coupon_checkout() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-coupon-checkout', 'wcc-switch-input', 'coupon_checkout', $this->wcc_option_check_radio_btn( 'coupon_checkout' ) );
+		}
+
+		public function wcc_section_id_coupon_cart() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-coupon-cart', 'wcc-switch-input', 'coupon_cart', $this->wcc_option_check_radio_btn( 'coupon_cart' ) );
+		}
+
+		public function wcc_section_id_description_tab() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-description-tab', 'wcc-switch-input', 'description_tab', $this->wcc_option_check_radio_btn( 'description_tab' ) );
+		}
+
+		public function wcc_section_id_review_tab() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-review-tab', 'wcc-switch-input', 'review_tab', $this->wcc_option_check_radio_btn( 'review_tab' ) );
+		}
+
+		public function wcc_section_id_additional_info_tab() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-additional-info-tab', 'wcc-switch-input', 'additional_info_tab', $this->wcc_option_check_radio_btn( 'additional_info_tab' ) );
+		}
+
 	}
 
 	new Wcc_Settings();

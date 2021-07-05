@@ -56,3 +56,8 @@ input:checked + .wcc-slider:before {
 .wcc-slider.wcc-round:before {
     border-radius: 50%
 }
+
+small.wcc-field-desc {
+    display: flex;
+    padding: 3px 5px
+}
