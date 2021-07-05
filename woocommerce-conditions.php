@@ -72,9 +72,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			 * @return array
 			 */
 			public function wcc_settings_link( $links, $file ): array {
-				$plugin = plugin_basename( __FILE__ );
-
-				if ( $file == $plugin && current_user_can( 'manage_options' ) ) {
+				if ( $file == WCC_PLUGIN_BASENAME && current_user_can( 'manage_options' ) ) {
 					array_unshift(
 						$links,
 						sprintf( '<a href="%s">' . __( 'Settings', 'wcc' ), 'admin.php?page=woocommerce-conditions' ) . '</a>'
@@ -86,5 +84,24 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		}
 
 		new WooCommerce_Conditions();
+	}
+} else {
+	function wcc_check_plugin() {
+		add_action( 'admin_notices', 'wcc_admin_notice' );
+		deactivate_plugins( plugin_basename( __FILE__ ) );
+
+		if ( isset( $_GET['activate'] ) ) {
+			unset( $_GET['activate'] );
+		}
+	}
+	add_action( 'admin_init', 'wcc_check_plugin' );
+
+	function wcc_admin_notice() {
+		?>
+        <div class="notice notice-error">
+            <p><?php _e( 'WooCommerce Conditions requires WooCommerce to run. Please install and activate WooCommerce.', 'wcc' ) ?></p>
+        </div>
+		<?php
+
 	}
 }
