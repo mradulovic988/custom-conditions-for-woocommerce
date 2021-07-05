@@ -276,7 +276,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 		}
 
 		public function wcc_section_id_card_button_archive() {
-			$this->wcc_settings_fields( 'checkbox', 'wcc-card-button-archive', 'wcc-switch-input', 'card_button_archive', $this->wcc_option_check_radio_btn( 'card_button_archive' ) );
+			$this->wcc_settings_fields( 'checkbox', 'wcc-card-button-archive', 'wcc-switch-input', 'card_button_archive', $this->wcc_option_check_radio_btn( 'card_button_archive' ), '', '' );
 		}
 
 		public function wcc_section_id_card_button_single() {
