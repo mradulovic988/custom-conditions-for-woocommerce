@@ -54,6 +54,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					include WCC_PLUGIN_PATH . '/public/class-wcc-public.php';
 					include WCC_PLUGIN_PATH . '/includes/class-wcc-includes.php';
 				}
+
 			}
 
 			public function wcc_load_plugin_textdomain() {
@@ -76,7 +77,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				if ( $file == $plugin && current_user_can( 'manage_options' ) ) {
 					array_unshift(
 						$links,
-						sprintf( '<a href="%s">' . __( 'Settings', 'wcc' ), 'add_link_here' ) . '</a>'
+						sprintf( '<a href="%s">' . __( 'Settings', 'wcc' ), 'admin.php?page=woocommerce-conditions' ) . '</a>'
 					);
 				}
 

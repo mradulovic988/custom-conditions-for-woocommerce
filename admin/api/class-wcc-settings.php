@@ -15,12 +15,6 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 			}
 		}
 
-		public function wcc_options_check( string $id ): string {
-			$options = get_option( 'wcc_settings_fields' );
-
-			return ( ! empty( $options[ $id ] ) ? $options[ $id ] : '' );
-		}
-
 		public function wcc_register_submenu_page() {
 			add_menu_page(
 				__( 'WooCommerce Conditions', 'wcc' ),
@@ -80,6 +74,12 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 					echo '<textarea class="' . $class . '" name="wcc_settings_fields[' . $name . ']" placeholder="' . __( $placeholder, 'wcc' ) . '" id="' . $id . '" rows="7" ' . $required . '>' . $value . '</textarea>';
 					break;
 			}
+		}
+
+		public function wcc_options_check( string $id ): string {
+			$options = get_option( 'wcc_settings_fields' );
+
+			return ( ! empty( $options[ $id ] ) ? $options[ $id ] : '' );
 		}
 
 		public function wcc_option_check_radio_btn( string $id ): string {
@@ -244,7 +244,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 			), 'wcc_settings_section_three' );
 
 			// Visibility page fields
-			add_settings_field( 'wcc_section_id_card_button_archive', __( 'Hide Add to Card button - Archive page', 'wcc' ), array(
+			add_settings_field( 'wcc_section_id_card_button_archive', __( 'Hide Add to Card button - Archive (Shop) page', 'wcc' ), array(
 				$this,
 				'wcc_section_id_card_button_archive'
 			), 'wcc_settings_section_one', 'wcc_section_id' );
@@ -252,6 +252,11 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 			add_settings_field( 'wcc_section_id_card_button_single', __( 'Hide Add to Card button - Single product page', 'wcc' ), array(
 				$this,
 				'wcc_section_id_card_button_single'
+			), 'wcc_settings_section_one', 'wcc_section_id' );
+
+			add_settings_field( 'wcc_section_id_card_button_category', __( 'Hide Add to Card button - Category product page', 'wcc' ), array(
+				$this,
+				'wcc_section_id_card_button_category'
 			), 'wcc_settings_section_one', 'wcc_section_id' );
 		}
 
@@ -276,6 +281,10 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 
 		public function wcc_section_id_card_button_single() {
 			$this->wcc_settings_fields( 'checkbox', 'wcc-card-button-single', 'wcc-switch-input', 'card_button_single', $this->wcc_option_check_radio_btn( 'card_button_single' ) );
+		}
+
+		public function wcc_section_id_card_button_category() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-card-button-category', 'wcc-switch-input', 'card_button_category', $this->wcc_option_check_radio_btn( 'card_button_category' ) );
 		}
 	}
 
