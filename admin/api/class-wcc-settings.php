@@ -138,10 +138,11 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 					do_settings_sections( 'wcc_settings_section_product_prices' );
 					do_settings_sections( 'wcc_settings_section_coupon' );
 					do_settings_sections( 'wcc_settings_section_description_tabs' );
+					do_settings_sections( 'wcc_settings_section_checkout_fields' );
 
 					submit_button(
 						__( 'Save Changes', 'wcc' ),
-						'',
+						'primary',
 						'wcc_save_changes_btn',
 						true,
 						array( 'id' => 'wcc-save-changes-btn' )
@@ -237,6 +238,11 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 				'wcc_settings_section_callback_description_tabs'
 			), 'wcc_settings_section_description_tabs' );
 
+			add_settings_section( 'wcc_section_id', __( 'Checkout fields', 'wcc' ), array(
+				$this,
+				'wcc_settings_section_callback_checkout_fields'
+			), 'wcc_settings_section_checkout_fields' );
+
 			add_settings_section( 'wcc_section_id', __( 'Strings', 'wcc' ), array(
 				$this,
 				'wcc_settings_section_strings_callback'
@@ -279,6 +285,11 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 				'wcc_section_id_prices_category'
 			), 'wcc_settings_section_product_prices', 'wcc_section_id' );
 
+			add_settings_field( 'wcc_section_id_prices_google', __( 'Hide Product prices from Google search', 'wcc' ), array(
+				$this,
+				'wcc_section_id_prices_google'
+			), 'wcc_settings_section_product_prices', 'wcc_section_id' );
+
 			// Coupon Code fields
 			add_settings_field( 'wcc_section_id_coupon_checkout', __( 'Hide Coupon Code - Checkout page', 'wcc' ), array(
 				$this,
@@ -306,6 +317,11 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 				'wcc_section_id_additional_info_tab'
 			), 'wcc_settings_section_description_tabs', 'wcc_section_id' );
 
+			add_settings_field( 'wcc_section_id_checkout_fields', __( 'Hide Specific Checkout field', 'wcc' ), array(
+				$this,
+				'wcc_section_id_checkout_fields'
+			), 'wcc_settings_section_checkout_fields', 'wcc_section_id' );
+
 		}
 
 		public function wcc_settings_section_callback() {
@@ -325,6 +341,28 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 
 		public function wcc_settings_section_callback_description_tabs() {
 			_e( 'Manage visibility for Description tabs.', 'wcc' );
+			echo '<hr>';
+		}
+
+		public function wcc_settings_section_callback_checkout_fields() {
+			_e( 'Manage visibility for Checkout fields.', 'wcc' );
+			echo '<br>';
+			_e( 'Use checkout fields slugs from the table below.', 'wcc' );
+			?>
+            <pre class="wcc-pre-code-table">
+First Name  - billing_first_name
+Last Name   - billing_last_name'
+Company     - billing_company
+Address 1   - billing_address_1
+Address 2   - billing_address_2
+City        - billing_city
+Postcode    - billing_postcode
+Country     - billing_country
+State       - billing_state
+Phone       - billing_phone
+Email       - billing_email
+            </pre>
+			<?php
 			echo '<hr>';
 		}
 
@@ -362,6 +400,10 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 			$this->wcc_settings_fields( 'checkbox', 'wcc-prices-category', 'wcc-switch-input', 'prices_category', $this->wcc_option_check_radio_btn( 'prices_category' ) );
 		}
 
+		public function wcc_section_id_prices_google() {
+			$this->wcc_settings_fields( 'checkbox', 'wcc-prices-google', 'wcc-switch-input', 'prices_google', $this->wcc_option_check_radio_btn( 'prices_google' ), '', __( 'Please note, these changes won\'t affect your website immediately. It will affect it when Google robots re-crawl your website again. That can take up to 40 days.', 'wcc' ) );
+		}
+
 		public function wcc_section_id_coupon_checkout() {
 			$this->wcc_settings_fields( 'checkbox', 'wcc-coupon-checkout', 'wcc-switch-input', 'coupon_checkout', $this->wcc_option_check_radio_btn( 'coupon_checkout' ) );
 		}
@@ -380,6 +422,10 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 
 		public function wcc_section_id_additional_info_tab() {
 			$this->wcc_settings_fields( 'checkbox', 'wcc-additional-info-tab', 'wcc-switch-input', 'additional_info_tab', $this->wcc_option_check_radio_btn( 'additional_info_tab' ) );
+		}
+
+		public function wcc_section_id_checkout_fields() {
+			$this->wcc_settings_fields( 'text', 'wcc-checkout-fields', 'wcc-settings-field', 'checkout_fields', esc_attr__( sanitize_text_field( $this->wcc_options_check( 'checkout_fields' ) ) ), 'billing_first_name, billing_city, billing_phone', __( 'Add checkout field slug comma separated.', 'wcc' ) );
 		}
 
 	}

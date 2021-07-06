@@ -13,20 +13,11 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 			add_action( 'init', array( $this, 'wcc_remove_add_to_cart_single' ) );
 			add_action( 'woocommerce_after_shop_loop_item', array( $this, 'wcc_remove_add_to_cart_category' ), 1 );
 			add_filter( 'woocommerce_after_shop_loop_item_title', array( $this, 'wcc_remove_product_prices' ), 2 );
-			add_filter( 'woocommerce_after_shop_loop_item_title', array(
-				$this,
-				'wcc_remove_product_prices_category'
-			), 2 );
+			add_filter( 'woocommerce_after_shop_loop_item_title', array( $this, 'wcc_remove_product_prices_category' ), 2 );
 
 			if ( $this->api->wcc_options_check( 'prices_all' ) == 1 ) {
-				add_filter( 'woocommerce_variable_sale_price_html', array(
-					$this,
-					'wcc_remove_product_prices_all'
-				), 9999, 2 );
-				add_filter( 'woocommerce_variable_price_html', array(
-					$this,
-					'wcc_remove_product_prices_all'
-				), 9999, 2 );
+				add_filter( 'woocommerce_variable_sale_price_html', array( $this, 'wcc_remove_product_prices_all' ), 9999, 2 );
+				add_filter( 'woocommerce_variable_price_html', array( $this, 'wcc_remove_product_prices_all' ), 9999, 2 );
 				add_filter( 'woocommerce_get_price_html', array( $this, 'wcc_remove_product_prices_all' ), 9999, 2 );
 			}
 
@@ -49,6 +40,12 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 			if ( $this->api->wcc_options_check( 'additional_info_tab' ) == 1 ) {
 				add_filter( 'woocommerce_product_tabs', array( $this, 'wcc_remove_additional_info_tab' ), 98 );
 			}
+
+			if ( $this->api->wcc_options_check( 'prices_google' ) == 1 ) {
+				add_filter( 'woocommerce_structured_data_product_offer', '__return_empty_array' );
+			}
+
+			add_filter( 'woocommerce_checkout_fields', array( $this, 'wcc_remove_checkout_fields' ) );
 		}
 
 		/**
@@ -142,22 +139,61 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 			return $enabled;
 		}
 
+		/**
+		 * Remove description tab
+		 *
+		 * @param $tabs
+		 *
+		 * @return mixed
+		 */
 		public function wcc_remove_description_tab( $tabs ) {
 			unset( $tabs['description'] );
 
 			return $tabs;
 		}
 
+		/**
+		 * Remove review tab
+		 *
+		 * @param $tabs
+		 *
+		 * @return mixed
+		 */
 		public function wcc_remove_review_tab( $tabs ) {
 			unset( $tabs['reviews'] );
 
 			return $tabs;
 		}
 
+		/**
+		 * Remove additional information tab
+		 *
+		 * @param $tabs
+		 *
+		 * @return mixed
+		 */
 		public function wcc_remove_additional_info_tab( $tabs ) {
 			unset( $tabs['additional_information'] );
 
 			return $tabs;
+		}
+
+		/**
+		 * Remove specific checkout fields
+		 *
+		 * @param $fields
+		 *
+		 * @return mixed
+		 */
+		public function wcc_remove_checkout_fields( $fields ) {
+			if ( ! empty( $this->api->wcc_options_check( 'checkout_fields' ) ) ) {
+				$get_fields = explode( ', ', $this->api->wcc_options_check( 'checkout_fields' ) );
+				foreach ( $get_fields as $get_field ) {
+					unset( $fields['billing'][ $get_field ] );
+				}
+
+				return $fields;
+			}
 		}
 	}
 

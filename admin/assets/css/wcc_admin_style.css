@@ -61,3 +61,15 @@ small.wcc-field-desc {
     display: flex;
     padding: 3px 5px
 }
+
+.wcc-settings-field {
+    width: 380px;
+    border: 1px solid rgba(183, 50, 37, .3);
+    border-radius: 0
+}
+
+.wcc-pre-code-table {
+    background: #fff;
+    padding: 40px 20px 20px 20px;
+    width: 400px;
+}
