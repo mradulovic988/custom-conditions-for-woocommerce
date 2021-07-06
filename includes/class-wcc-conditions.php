@@ -13,11 +13,20 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 			add_action( 'init', array( $this, 'wcc_remove_add_to_cart_single' ) );
 			add_action( 'woocommerce_after_shop_loop_item', array( $this, 'wcc_remove_add_to_cart_category' ), 1 );
 			add_filter( 'woocommerce_after_shop_loop_item_title', array( $this, 'wcc_remove_product_prices' ), 2 );
-			add_filter( 'woocommerce_after_shop_loop_item_title', array( $this, 'wcc_remove_product_prices_category' ), 2 );
+			add_filter( 'woocommerce_after_shop_loop_item_title', array(
+				$this,
+				'wcc_remove_product_prices_category'
+			), 2 );
 
 			if ( $this->api->wcc_options_check( 'prices_all' ) == 1 ) {
-				add_filter( 'woocommerce_variable_sale_price_html', array( $this, 'wcc_remove_product_prices_all' ), 9999, 2 );
-				add_filter( 'woocommerce_variable_price_html', array( $this, 'wcc_remove_product_prices_all' ), 9999, 2 );
+				add_filter( 'woocommerce_variable_sale_price_html', array(
+					$this,
+					'wcc_remove_product_prices_all'
+				), 9999, 2 );
+				add_filter( 'woocommerce_variable_price_html', array(
+					$this,
+					'wcc_remove_product_prices_all'
+				), 9999, 2 );
 				add_filter( 'woocommerce_get_price_html', array( $this, 'wcc_remove_product_prices_all' ), 9999, 2 );
 			}
 
@@ -46,6 +55,8 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 			}
 
 			add_filter( 'woocommerce_checkout_fields', array( $this, 'wcc_remove_checkout_fields' ) );
+			add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'wcc_change_name_add_to_cart_archive' ) );
+			add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'wcc_change_name_add_to_cart_single' ) );
 		}
 
 		/**
@@ -193,6 +204,22 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 				}
 
 				return $fields;
+			}
+		}
+
+		public function wcc_change_name_add_to_cart_archive() {
+			if ( ! empty( $this->api->wcc_options_check( 'string_add_to_cart_archive' ) ) ) {
+				return __( $this->api->wcc_options_check( 'string_add_to_cart_archive' ), 'wcc' );
+			} else {
+				return __( 'Add to cart', 'woocommerce' );
+			}
+		}
+
+		public function wcc_change_name_add_to_cart_single() {
+			if ( ! empty( $this->api->wcc_options_check( 'string_add_to_cart_single' ) ) ) {
+				return __( $this->api->wcc_options_check( 'string_add_to_cart_single' ), 'wcc' );
+			} else {
+				return __( 'Add to cart', 'woocommerce' );
 			}
 		}
 	}

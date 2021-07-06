@@ -169,13 +169,13 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 
 					<?php
 					settings_errors( 'wcc_settings_fields' );
-					//					wp_nonce_field( 'wcc_dashboard_save', 'wcc_form_save_name' );
+                    wp_nonce_field( 'wcc_string_dashboard_save', 'wcc_string_form_save_name' );
 					settings_fields( 'wcc_settings_fields' );
 					do_settings_sections( 'wcc_settings_section_two' );
 
 					submit_button(
 						__( 'Save Changes', 'wcc' ),
-						'',
+						'primary',
 						'wcc_save_changes_btn',
 						true,
 						array( 'id' => 'wcc-save-changes-btn' )
@@ -183,6 +183,12 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 					?>
 
                 </form>
+	            <?php
+	            if ( ! isset( $_POST['wcc_string_form_save_name'] ) ||
+	                 ! wp_verify_nonce( $_POST['wcc_string_form_save_name'], 'wcc_string_dashboard_save' ) ) {
+		            return;
+	            }
+	            ?>
             </div>
 			<?php
 		}
@@ -243,7 +249,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 				'wcc_settings_section_callback_checkout_fields'
 			), 'wcc_settings_section_checkout_fields' );
 
-			add_settings_section( 'wcc_section_id', __( 'Strings', 'wcc' ), array(
+			add_settings_section( 'wcc_section_id', __( 'Add to Cart button', 'wcc' ), array(
 				$this,
 				'wcc_settings_section_strings_callback'
 			), 'wcc_settings_section_two' );
@@ -322,6 +328,16 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 				'wcc_section_id_checkout_fields'
 			), 'wcc_settings_section_checkout_fields', 'wcc_section_id' );
 
+			add_settings_field( 'wcc_section_id_string_add_to_cart_archive', __( 'Change name for Add to Cart - Archive page', 'wcc' ), array(
+				$this,
+				'wcc_section_id_string_add_to_cart_archive'
+			), 'wcc_settings_section_two', 'wcc_section_id' );
+
+			add_settings_field( 'wcc_section_id_string_add_to_cart_single', __( 'Change name for Add to Cart - Single page', 'wcc' ), array(
+				$this,
+				'wcc_section_id_string_add_to_cart_single'
+			), 'wcc_settings_section_two', 'wcc_section_id' );
+
 		}
 
 		public function wcc_settings_section_callback() {
@@ -368,7 +384,7 @@ Email       - billing_email
 
 		public function wcc_settings_section_strings_callback() {
 			// CHANGE DESCRIPTION LATER
-			_e( 'Strings.', 'wcc' );
+			_e( 'Change text for Add to Cart button.', 'wcc' );
 		}
 
 		public function wcc_settings_section_documentation_callback() {
@@ -401,7 +417,7 @@ Email       - billing_email
 		}
 
 		public function wcc_section_id_prices_google() {
-			$this->wcc_settings_fields( 'checkbox', 'wcc-prices-google', 'wcc-switch-input', 'prices_google', $this->wcc_option_check_radio_btn( 'prices_google' ), '', __( 'Please note, these changes won\'t affect your website immediately. It will affect it when Google robots re-crawl your website again. That can take up to 40 days.', 'wcc' ) );
+			$this->wcc_settings_fields( 'checkbox', 'wcc-prices-google', 'wcc-switch-input', 'prices_google', $this->wcc_option_check_radio_btn( 'prices_google' ), '', __( 'This change won\'t affect your website immediately. It will affect it when Google robots re-crawl your website again. That can take up to 40 days.', 'wcc' ) );
 		}
 
 		public function wcc_section_id_coupon_checkout() {
@@ -426,6 +442,14 @@ Email       - billing_email
 
 		public function wcc_section_id_checkout_fields() {
 			$this->wcc_settings_fields( 'text', 'wcc-checkout-fields', 'wcc-settings-field', 'checkout_fields', esc_attr__( sanitize_text_field( $this->wcc_options_check( 'checkout_fields' ) ) ), 'billing_first_name, billing_city, billing_phone', __( 'Add checkout field slug comma separated.', 'wcc' ) );
+		}
+
+		public function wcc_section_id_string_add_to_cart_archive() {
+			$this->wcc_settings_fields( 'text', 'wcc-string-add-to-cart-archive', 'wcc-settings-field', 'string_add_to_cart_archive', esc_attr__( sanitize_text_field( $this->wcc_options_check( 'string_add_to_cart_archive' ) ) ), 'Buy Now' );
+		}
+
+		public function wcc_section_id_string_add_to_cart_single() {
+			$this->wcc_settings_fields( 'text', 'wcc-string-add-to-cart-single', 'wcc-settings-field', 'string_add_to_cart_single', esc_attr__( sanitize_text_field( $this->wcc_options_check( 'string_add_to_cart_single' ) ) ), 'Buy Now' );
 		}
 
 	}
