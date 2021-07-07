@@ -1,4 +1,12 @@
 <?php
+/**
+ * Main class for all API Settings communication
+ *
+ * @class Wcc_Settings
+ * @package Wcc_Settings
+ * @version 1.0.0
+ * @author Marko Radulovic
+ */
 
 if ( ! class_exists( 'Wcc_Settings' ) ) {
 	class Wcc_Settings {

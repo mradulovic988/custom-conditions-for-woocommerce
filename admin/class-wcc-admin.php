@@ -1,4 +1,12 @@
 <?php
+/**
+ * Main class for all admin side communication
+ *
+ * @class Wcc_Admin
+ * @package Wcc_Admin
+ * @version 1.0.0
+ * @author Marko Radulovic
+ */
 
 if ( ! class_exists( 'Wcc_Admin' ) ) {
 	class Wcc_Admin {

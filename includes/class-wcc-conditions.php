@@ -1,4 +1,12 @@
 <?php
+/**
+ * Main class for all conditions
+ *
+ * @class Wcc_Conditions
+ * @package Wcc_Conditions
+ * @version 1.0.0
+ * @author Marko Radulovic
+ */
 
 include WCC_PLUGIN_PATH . '/admin/api/class-wcc-settings.php';
 if ( ! class_exists( 'Wcc_Conditions' ) ) {

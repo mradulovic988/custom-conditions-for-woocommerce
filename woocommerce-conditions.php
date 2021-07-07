@@ -19,10 +19,6 @@
  * Text Domain:       wcc
  * Domain Path:       /languages
  *
- * Woo:               12345:342928dfsfhsf8429842374wdf4234sfd
- * WC requires at least: 2.2
- * WC tested up to:   2.3
- *
  * License:           GPL v3 or later
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  */
@@ -36,6 +32,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	if ( ! class_exists( 'WooCommerce_Conditions' ) ) {
 		class WooCommerce_Conditions {
+			private static $instance;
+
 			public function __construct() {
 				if ( ! defined( 'WCC_PLUGIN_PATH' ) ) {
 					define( 'WCC_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
@@ -66,8 +64,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}
 
 			/**
-             * Add settings link on plugins page
-             *
+			 * Add settings link on plugins page
+			 *
 			 * @param $links
 			 * @param $file
 			 *
@@ -83,9 +81,17 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 				return $links;
 			}
+
+			public static function wcc_instance(): WooCommerce_Conditions {
+				if ( null === self::$instance ) {
+					self::$instance = new self();
+				}
+
+				return self::$instance;
+			}
 		}
 
-		new WooCommerce_Conditions();
+		WooCommerce_Conditions::wcc_instance();
 	}
 }
 
@@ -99,6 +105,7 @@ if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
 			unset( $_GET['activate'] );
 		}
 	}
+
 	add_action( 'admin_init', 'wcc_check_plugin' );
 
 	function wcc_admin_notice() { ?>
