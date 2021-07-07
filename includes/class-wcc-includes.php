@@ -11,9 +11,7 @@
 if ( ! class_exists('Wcc_Includes')) {
 	class Wcc_Includes {
 
-		public function __construct() {
-			include WCC_PLUGIN_PATH . '/includes/class-wcc-conditions.php';
-		}
+		public function __construct() {}
 	}
 
 	new Wcc_Includes();

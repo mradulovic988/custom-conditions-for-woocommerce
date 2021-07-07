@@ -8,6 +8,12 @@
  * @author Marko Radulovic
  */
 
-class Wcc_Public {
+if ( ! class_exists( 'Wcc_Public' ) ) {
+	class Wcc_Public {
+		public function __construct() {
+			include WCC_PLUGIN_PATH . '/public/class-wcc-conditions.php';
+		}
+	}
 
+	new Wcc_Public();
 }
