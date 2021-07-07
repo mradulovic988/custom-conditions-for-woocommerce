@@ -12,7 +12,7 @@ include WCC_PLUGIN_PATH . '/admin/api/class-wcc-settings.php';
 if ( ! class_exists( 'Wcc_Conditions' ) ) {
 
 	class Wcc_Conditions {
-		protected $api;
+		public Wcc_Settings $api;
 
 		public function __construct() {
 			$this->api = new Wcc_Settings();
@@ -219,7 +219,7 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 			if ( ! empty( $this->api->wcc_options_check( 'string_add_to_cart_archive' ) ) ) {
 				return __( $this->api->wcc_options_check( 'string_add_to_cart_archive' ), 'wcc' );
 			} else {
-				return __( 'Add to cart', 'woocommerce' );
+				return __( 'Add to cart', 'wcc' );
 			}
 		}
 
@@ -227,7 +227,7 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 			if ( ! empty( $this->api->wcc_options_check( 'string_add_to_cart_single' ) ) ) {
 				return __( $this->api->wcc_options_check( 'string_add_to_cart_single' ), 'wcc' );
 			} else {
-				return __( 'Add to cart', 'woocommerce' );
+				return __( 'Add to cart', 'wcc' );
 			}
 		}
 	}

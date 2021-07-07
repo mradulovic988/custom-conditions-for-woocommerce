@@ -8,7 +8,7 @@
  * @author Marko Radulovic
  */
 
-if ( ! class_exists('Wcc_Includes')) {
+if ( ! class_exists( 'Wcc_Includes' ) ) {
 	class Wcc_Includes {
 
 		public function __construct() {}

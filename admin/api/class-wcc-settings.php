@@ -19,7 +19,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 		public function wcc_show_error_notice() {
 			if ( isset( $_GET['settings-updated'] ) ) {
 				$message = __( 'You have successfully saved your settings.', 'wcc' );
-				add_settings_error( 'wcc_settings_fields', 'sucess', $message, 'success' );
+				add_settings_error( 'wcc_settings_fields', 'success', $message, 'success' );
 			}
 		}
 
@@ -375,7 +375,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 			?>
             <pre class="wcc-pre-code-table">
 First Name  - billing_first_name
-Last Name   - billing_last_name'
+Last Name   - billing_last_name
 Company     - billing_company
 Address 1   - billing_address_1
 Address 2   - billing_address_2
