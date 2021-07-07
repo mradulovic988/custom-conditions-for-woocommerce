@@ -215,6 +215,11 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 			}
 		}
 
+		/**
+		 * Changing text for Add to Cart button on Archive page
+		 *
+		 * @return string|void
+		 */
 		public function wcc_change_name_add_to_cart_archive() {
 			if ( ! empty( $this->api->wcc_options_check( 'string_add_to_cart_archive' ) ) ) {
 				return __( $this->api->wcc_options_check( 'string_add_to_cart_archive' ), 'wcc' );
@@ -223,6 +228,11 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 			}
 		}
 
+		/**
+		 * Changing text for Add to Cart button on Single product page
+		 *
+		 * @return string|void
+		 */
 		public function wcc_change_name_add_to_cart_single() {
 			if ( ! empty( $this->api->wcc_options_check( 'string_add_to_cart_single' ) ) ) {
 				return __( $this->api->wcc_options_check( 'string_add_to_cart_single' ), 'wcc' );
