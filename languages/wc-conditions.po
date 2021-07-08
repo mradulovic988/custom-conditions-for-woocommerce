@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Conditions\n"
+"Project-Id-Version: WC Conditions\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-09 00:38+0200\n"
 "PO-Revision-Date: 2021-07-09 00.39+0100\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: woocommerce-conditions.php:133
 msgid ""
-"WooCommerce Conditions requires WooCommerce to run. Please install and "
+"WC Conditions requires WooCommerce to run. Please install and "
 "activate WooCommerce."
 msgstr ""
 
