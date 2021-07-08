@@ -2,7 +2,7 @@
 /**
  * WooCommerce Conditions
  *
- * @package           WooCommerceConditions
+ * @package           WooCommerce_Conditions
  * @author            Marko Radulovic
  * @copyright         2021 Marko Radulovic
  * @license           GPL-3.0-or-later
@@ -10,10 +10,10 @@
  * @wordpress-plugin
  * Plugin Name:       WooCommerce Conditions
  * Plugin URI:        https://wordpress.org/plugins/woocommerce-conditions
- * Description:       Description of the plugin.
+ * Description:       If you want quickly to show/hide/rename most of the functionalities in WooCommerce, this is the right plugin.
  * Version:           1.0.0
- * Requires at least: 5.2
- * Requires PHP:      7.2
+ * Requires at least: 4.6
+ * Requires PHP:      7.1
  * Author:            Marko Radulovic
  * Author URI:        https://mlab-studio.com
  * Text Domain:       wcc
@@ -48,6 +48,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					$this->wcc_load_plugin_textdomain();
 
 					add_filter( 'plugin_action_links', array( $this, 'wcc_settings_link' ), 10, 2 );
+					add_filter( 'plugin_row_meta', array( $this, 'wcc_set_plugin_meta' ), 10, 2 );
 				} else {
 					include WCC_PLUGIN_PATH . '/public/class-wcc-public.php';
 					include WCC_PLUGIN_PATH . '/includes/class-wcc-includes.php';
@@ -76,6 +77,25 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					array_unshift(
 						$links,
 						sprintf( '<a href="%s">' . __( 'Settings', 'wcc' ), 'admin.php?page=woocommerce-conditions' ) . '</a>'
+					);
+				}
+
+				return $links;
+			}
+
+			// Settings link for the plugin
+			public function wcc_set_plugin_meta( $links, $file ): array {
+				$plugin = plugin_basename( __FILE__ );
+
+				if ( $file == $plugin && current_user_can( 'manage_options' ) ) {
+					array_push(
+						$links,
+						sprintf( '<a target="_blank" href="%s">' . __( 'Docs & FAQs', 'wcc' ) . '</a>', 'https://wordpress.org/support/plugin/woocommerce-conditions' )
+					);
+
+					array_push(
+						$links,
+						sprintf( '<a target="_blank" href="%s">' . __( 'GitHub', 'wcc' ) . '</a>', 'https://github.com/mradulovic988/woocommerce-conditions' )
 					);
 				}
 

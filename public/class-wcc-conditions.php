@@ -64,7 +64,10 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 
 			add_filter( 'woocommerce_checkout_fields', array( $this, 'wcc_remove_checkout_fields' ) );
 			add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'wcc_change_name_add_to_cart_archive' ) );
-			add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'wcc_change_name_add_to_cart_single' ) );
+			add_filter( 'woocommerce_product_single_add_to_cart_text', array(
+				$this,
+				'wcc_change_name_add_to_cart_single'
+			) );
 		}
 
 		/**
@@ -205,14 +208,12 @@ if ( ! class_exists( 'Wcc_Conditions' ) ) {
 		 * @return mixed
 		 */
 		public function wcc_remove_checkout_fields( $fields ) {
-			if ( ! empty( $this->api->wcc_options_check( 'checkout_fields' ) ) ) {
-				$get_fields = explode( ', ', $this->api->wcc_options_check( 'checkout_fields' ) );
-				foreach ( $get_fields as $get_field ) {
-					unset( $fields['billing'][ $get_field ] );
-				}
-
-				return $fields;
+			$get_fields = explode( ', ', $this->api->wcc_options_check( 'checkout_fields' ) );
+			foreach ( $get_fields as $get_field ) {
+				unset( $fields['billing'][ $get_field ] );
 			}
+
+			return $fields;
 		}
 
 		/**
