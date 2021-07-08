@@ -2,14 +2,14 @@
 /**
  * WooCommerce Conditions
  *
- * @package           WooCommerce_Conditions
+ * @package           WC_Conditions
  * @author            Marko Radulovic
  * @copyright         2021 Marko Radulovic
  * @license           GPL-3.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       WooCommerce Conditions
- * Plugin URI:        https://wordpress.org/plugins/woocommerce-conditions
+ * Plugin Name:       WC Conditions
+ * Plugin URI:        https://wordpress.org/plugins/wc-conditions
  * Description:       If you want quickly to show/hide/rename most of the functionalities in WooCommerce, this is the right plugin.
  * Version:           1.0.0
  * Requires at least: 4.6
@@ -30,8 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Run plugin settings if WooCommerce is active
  */
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-	if ( ! class_exists( 'WooCommerce_Conditions' ) ) {
-		class WooCommerce_Conditions {
+	if ( ! class_exists( 'WC_Conditions' ) ) {
+		class WC_Conditions {
 			private static $instance;
 
 			public function __construct() {
@@ -76,7 +76,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				if ( $file == WCC_PLUGIN_BASENAME && current_user_can( 'manage_options' ) ) {
 					array_unshift(
 						$links,
-						sprintf( '<a href="%s">' . __( 'Settings', 'wcc' ), 'admin.php?page=woocommerce-conditions' ) . '</a>'
+						sprintf( '<a href="%s">' . __( 'Settings', 'wcc' ), 'admin.php?page=wc-conditions' ) . '</a>'
 					);
 				}
 
@@ -90,19 +90,19 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				if ( $file == $plugin && current_user_can( 'manage_options' ) ) {
 					array_push(
 						$links,
-						sprintf( '<a target="_blank" href="%s">' . __( 'Docs & FAQs', 'wcc' ) . '</a>', 'https://wordpress.org/support/plugin/woocommerce-conditions' )
+						sprintf( '<a target="_blank" href="%s">' . __( 'Docs & FAQs', 'wcc' ) . '</a>', 'https://wordpress.org/support/plugin/wc-conditions' )
 					);
 
 					array_push(
 						$links,
-						sprintf( '<a target="_blank" href="%s">' . __( 'GitHub', 'wcc' ) . '</a>', 'https://github.com/mradulovic988/woocommerce-conditions' )
+						sprintf( '<a target="_blank" href="%s">' . __( 'GitHub', 'wcc' ) . '</a>', 'https://github.com/mradulovic988/wc-conditions' )
 					);
 				}
 
 				return $links;
 			}
 
-			public static function wcc_instance(): WooCommerce_Conditions {
+			public static function wcc_instance(): WC_Conditions {
 				if ( null === self::$instance ) {
 					self::$instance = new self();
 				}
@@ -111,7 +111,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			}
 		}
 
-		WooCommerce_Conditions::wcc_instance();
+		WC_Conditions::wcc_instance();
 	}
 }
 

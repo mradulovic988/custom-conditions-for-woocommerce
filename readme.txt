@@ -1,4 +1,4 @@
-=== WooCommerce Conditions ===
+=== WC Conditions ===
 Contributors: upss1988
 Tags: hide add to cart, hide product prices, hide coupon code, hide tabs, hide checkout fields, show, change name to add to cart, woocommerce conditions
 Requires at least: 4.6
@@ -12,7 +12,7 @@ URI: http://www.gnu.org/licenses/gpl-3.0.html
 == Description ==
 
 If you want to quickly show / hide / rename most of the functionalities in WooCommerce, this is the right plugin for you.
-WooCommerce Conditions is a modern and simple way to change most of the functionalities in WooCommerce.
+WC Conditions is a modern and simple way to change most of the functionalities in WooCommerce.
 
 == 🔥 Features 🔥 ==
 
@@ -43,7 +43,7 @@ WC Conditions has your website performance in mind -  every script and style is 
 = Default Method =
 * Go to Settings > Plugins in your administrator panel.
 * Click `Add New`
-* Search for WooCommerce Conditions
+* Search for WC Conditions
 * Click install.*
 
 = Easy Method =
@@ -63,15 +63,13 @@ WC Conditions has your website performance in mind -  every script and style is 
 
 == Frequently Asked Questions ==
 
-= Can I use WooCommerce Conditions plugin with any WordPress theme? =
+= Can I use WC Conditions plugin with any WordPress theme? =
 
 Yes. The plugin is fully compatible with every WordPress theme.
 
 = I don't see the changes for Google prices =
 
-That change won't affect your website immediately. It will affect it when Google robots re-crawl your website again. That can take up to 40 days
-
-Please make sure to clear the cache and to turn on Debug mode field. When you finish with the testing, make sure to turn off that field.
+That change won't affect your website immediately. It will affect it when Google robots re-crawl your website again. That can take up to 40 days.
 
 == Screenshots ==
 

@@ -29,7 +29,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 				__( 'WC Conditions', 'wcc' ),
 				__( 'WC Conditions', 'wcc' ),
 				'manage_options',
-				'woocommerce-conditions',
+				'wc-conditions',
 				array( $this, 'wcc_register_submenu_page_callback' )
 			);
 		}
