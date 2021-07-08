@@ -71,7 +71,7 @@ if ( ! class_exists( 'Wcc_Settings' ) ) {
 
 		public function wcc_register_submenu_page_callback() {
 			?>
-            <div id="agy-wrap" class="wrap">
+            <div class="wrap">
                 <form action="options.php" method="post">
 
 					<?php
