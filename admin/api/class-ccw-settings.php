@@ -37,22 +37,22 @@ if ( ! class_exists( 'Ccw_Settings' ) ) {
 		protected function ccw_settings_fields( string $type, string $id, string $class, string $name, string $value, $placeholder = '', $description = '', $min = '', $max = '', $required = '' ) {
 			switch ( $type ) {
 				case 'text':
-					echo '<input type="text" id="' . $id . '" class="' . $class . '" name="ccw_settings_fields[' . $name . ']" value="' . $value . '" placeholder="' . __( $placeholder, 'custom-conditions-for-woocommerce' ) . '" ' . $required . '><small class="ccw-field-desc">' . __( $description, 'custom-conditions-for-woocommerce' ) . '</small>';
+					echo '<input type="text" id="' . $id . '" class="' . $class . '" name="ccw_settings_fields[' . $name . ']" value="' . $value . '" placeholder="' . esc_attr( $placeholder ) . '" ' . $required . '><small class="ccw-field-desc">' . esc_attr( $description ) . '</small>';
 					break;
 				case 'number':
-					echo '<input type="number" id="' . $id . '" class="' . $class . '" name="ccw_settings_fields[' . $name . ']" value="' . $value . '" placeholder="' . __( $placeholder, 'custom-conditions-for-woocommerce' ) . '" min="' . $min . '" max="' . $max . '"><small class="ccw-field-desc">' . __( $description, 'custom-conditions-for-woocommerce' ) . '</small>';
+					echo '<input type="number" id="' . $id . '" class="' . $class . '" name="ccw_settings_fields[' . $name . ']" value="' . $value . '" placeholder="' . esc_attr( $placeholder ) . '" min="' . $min . '" max="' . $max . '"><small class="ccw-field-desc">' . esc_attr( $description ) . '</small>';
 					break;
 				case 'checkbox':
-					echo '<label class="ccw-switch" for="' . $id . '"><input type="checkbox" id="' . $id . '" class="' . $class . '" name="ccw_settings_fields[' . $name . ']" value="1" ' . $value . '><span class="ccw-slider ccw-round"></span></label><small class="ccw-field-desc">' . $description . '</small>';
+					echo '<label class="ccw-switch" for="' . $id . '"><input type="checkbox" id="' . $id . '" class="' . $class . '" name="ccw_settings_fields[' . $name . ']" value="1" ' . $value . '><span class="ccw-slider ccw-round"></span></label><small class="ccw-field-desc">' . esc_attr( $description ) . '</small>';
 					break;
 				case 'url':
-					echo '<input type="url" id="' . $id . '" class="' . $class . '" name="ccw_settings_fields[' . $name . ']" value="' . $value . '"placeholder="' . __( $placeholder, 'custom-conditions-for-woocommerce' ) . '" ' . $required . '><small class="ccw-field-desc">' . __( $description, 'custom-conditions-for-woocommerce' ) . '</small>';
+					echo '<input type="url" id="' . $id . '" class="' . $class . '" name="ccw_settings_fields[' . $name . ']" value="' . $value . '"placeholder="' . esc_url( $placeholder ) . '" ' . $required . '><small class="ccw-field-desc">' . esc_url( $description ) . '</small>';
 					break;
 				case 'color':
 					echo '<input type="color" id="' . $id . '" class="' . $class . '" name="ccw_settings_fields[' . $name . ']" value="' . $value . '">';
 					break;
 				case 'textarea':
-					echo '<textarea class="' . $class . '" name="ccw_settings_fields[' . $name . ']" placeholder="' . __( $placeholder, 'custom-conditions-for-woocommerce' ) . '" id="' . $id . '" rows="7" ' . $required . '>' . $value . '</textarea>';
+					echo '<textarea class="' . $class . '" name="ccw_settings_fields[' . $name . ']" placeholder="' . esc_textarea( $placeholder ) . '" id="' . $id . '" rows="7" ' . $required . '>' . esc_textarea( $value ) . '</textarea>';
 					break;
 			}
 		}
@@ -251,9 +251,8 @@ if ( ! class_exists( 'Ccw_Settings' ) ) {
 			_e( 'Manage visibility for Checkout fields.', 'custom-conditions-for-woocommerce' );
 			echo '<br>';
 			_e( 'Use checkout fields slugs from the table below.', 'custom-conditions-for-woocommerce' );
-			?>
-            <pre class="ccw-pre-code-table">
-First Name  - billing_first_name
+
+			echo '<pre class="ccw-pre-code-table">' . esc_attr( 'First Name  - billing_first_name
 Last Name   - billing_last_name
 Company     - billing_company
 Address 1   - billing_address_1
@@ -263,9 +262,7 @@ Postcode    - billing_postcode
 Country     - billing_country
 State       - billing_state
 Phone       - billing_phone
-Email       - billing_email
-            </pre>
-			<?php
+Email       - billing_email' ) . '</pre>';
 			echo '<hr>';
 		}
 
@@ -328,11 +325,11 @@ Email       - billing_email
 		}
 
 		public function ccw_section_id_string_add_to_cart_archive() {
-			$this->ccw_settings_fields( 'text', 'ccw-string-add-to-cart-archive', 'ccw-settings-field', 'string_add_to_cart_archive', esc_attr__( sanitize_text_field( $this->ccw_options_check( 'string_add_to_cart_archive' ) ) ), 'Add to Cart' );
+			$this->ccw_settings_fields( 'text', 'ccw-string-add-to-cart-archive', 'ccw-settings-field', 'string_add_to_cart_archive', esc_attr__( sanitize_text_field( $this->ccw_options_check( 'string_add_to_cart_archive' ) ) ), __( 'Add to Cart', 'custom-conditions-for-woocommerce' ), );
 		}
 
 		public function ccw_section_id_string_add_to_cart_single() {
-			$this->ccw_settings_fields( 'text', 'ccw-string-add-to-cart-single', 'ccw-settings-field', 'string_add_to_cart_single', esc_attr__( sanitize_text_field( $this->ccw_options_check( 'string_add_to_cart_single' ) ) ), 'Add to Cart' );
+			$this->ccw_settings_fields( 'text', 'ccw-string-add-to-cart-single', 'ccw-settings-field', 'string_add_to_cart_single', esc_attr__( sanitize_text_field( $this->ccw_options_check( 'string_add_to_cart_single' ) ) ), __( 'Add to Cart', 'custom-conditions-for-woocommerce' ) );
 		}
 
 	}
