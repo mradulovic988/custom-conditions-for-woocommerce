@@ -2,17 +2,17 @@
 /**
  * Main class for all communication between front-end and with the back-end
  *
- * @class Wcc_Includes
- * @package Wcc_Includes
+ * @class Ccw_Includes
+ * @package Ccw_Includes
  * @version 1.0.0
  * @author Marko Radulovic
  */
 
-if ( ! class_exists( 'Wcc_Includes' ) ) {
-	class Wcc_Includes {
+if ( ! class_exists( 'Ccw_Includes' ) ) {
+	class Ccw_Includes {
 
 		public function __construct() {}
 	}
 
-	new Wcc_Includes();
+	new Ccw_Includes();
 }

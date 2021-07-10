@@ -1,17 +1,17 @@
-.wcc-switch {
+.ccw-switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px
 }
 
-.wcc-switch input {
+.ccw-switch input {
     opacity: 0;
     width: 0;
     height: 0
 }
 
-.wcc-slider {
+.ccw-slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -23,7 +23,7 @@
     transition: .4s
 }
 
-.wcc-slider:before {
+.ccw-slider:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -35,46 +35,46 @@
     transition: .4s
 }
 
-input:checked + .wcc-slider {
+input:checked + .ccw-slider {
     background-color: #b05d92
 }
 
-input:focus + .wcc-slider {
+input:focus + .ccw-slider {
     box-shadow: 0 0 1px #b05d92
 }
 
-input:checked + .wcc-slider:before {
+input:checked + .ccw-slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px)
 }
 
-.wcc-slider.wcc-round {
+.ccw-slider.ccw-round {
     border-radius: 34px
 }
 
-.wcc-slider.wcc-round:before {
+.ccw-slider.ccw-round:before {
     border-radius: 50%
 }
 
-small.wcc-field-desc {
+small.ccw-field-desc {
     display: flex;
     padding: 3px 5px
 }
 
-.wcc-settings-field {
+.ccw-settings-field {
     width: 380px;
     border: 1px solid rgba(183, 50, 37, .3);
     border-radius: 0
 }
 
-.wcc-pre-code-table {
+.ccw-pre-code-table {
     background: #fff;
     padding: 40px 20px 20px 20px;
     width: 400px;
 }
 
-.wcc-loader {
+.ccw-loader {
     position: relative;
     top: 30px;
     left: 10px;
@@ -83,13 +83,13 @@ small.wcc-field-desc {
     border-top: 3px solid #b05d92;
     width: 25px;
     height: 25px;
-    -webkit-animation: wcc-spin 1.2s linear infinite;
-    animation: wcc-spin 1.2s linear infinite;
+    -webkit-animation: ccw-spin 1.2s linear infinite;
+    animation: ccw-spin 1.2s linear infinite;
     display: none;
 }
 
 /* Safari */
-@-webkit-keyframes wcc-spin {
+@-webkit-keyframes ccw-spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
 }
@@ -99,6 +99,6 @@ small.wcc-field-desc {
     100% { transform: rotate(360deg); }
 }
 
-.wcc-loading-wrapper {
+.ccw-loading-wrapper {
     display: inline-flex;
 }
