@@ -1,6 +1,6 @@
 === Custom Conditions For WooCommerce ===
 Contributors: upss1988
-Tags: hide add to cart, hide product prices, hide coupon code, hide tabs, hide checkout fields, show, change name to add to cart, woocommerce conditions
+Tags: hide add to cart, hide product prices, hide coupon code, hide tabs, hide checkout fields, show, change name to add to cart, custom conditions for woocommerce conditions
 Requires at least: 4.6
 Tested up to: 5.7
 Requires PHP: 7.1
