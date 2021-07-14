@@ -211,9 +211,9 @@ if ( ! class_exists( 'Ccw_Conditions' ) ) {
 		 */
 		public function ccw_change_name_add_to_cart_archive() {
 			if ( ! empty( $this->api->ccw_options_check( 'string_add_to_cart_archive' ) ) ) {
-				return __( $this->api->ccw_options_check( 'string_add_to_cart_archive' ), 'custom-conditions-for-woocommerce' );
+				return esc_attr__( $this->api->ccw_options_check( 'string_add_to_cart_archive' ), 'custom-conditions-for-woocommerce' );
 			} else {
-				return __( 'Add to cart', 'custom-conditions-for-woocommerce' );
+				return esc_attr__( 'Add to cart', 'custom-conditions-for-woocommerce' );
 			}
 		}
 
@@ -224,9 +224,9 @@ if ( ! class_exists( 'Ccw_Conditions' ) ) {
 		 */
 		public function ccw_change_name_add_to_cart_single() {
 			if ( ! empty( $this->api->ccw_options_check( 'string_add_to_cart_single' ) ) ) {
-				return __( $this->api->ccw_options_check( 'string_add_to_cart_single' ), 'custom-conditions-for-woocommerce' );
+				return esc_attr__( $this->api->ccw_options_check( 'string_add_to_cart_single' ), 'custom-conditions-for-woocommerce' );
 			} else {
-				return __( 'Add to cart', 'custom-conditions-for-woocommerce' );
+				return esc_attr__( 'Add to cart', 'custom-conditions-for-woocommerce' );
 			}
 		}
 	}

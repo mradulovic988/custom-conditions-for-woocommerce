@@ -76,7 +76,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				if ( $file == CCW_PLUGIN_BASENAME && current_user_can( 'manage_options' ) ) {
 					array_unshift(
 						$links,
-						sprintf( '<a href="%s">' . __( 'Settings', 'custom-conditions-for-woocommerce' ), 'admin.php?page=custom-conditions-for-woocommerce' ) . '</a>'
+						sprintf( '<a href="%s">' . esc_attr__( 'Settings', 'custom-conditions-for-woocommerce' ), 'admin.php?page=custom-conditions-for-woocommerce' ) . '</a>'
 					);
 				}
 
@@ -90,12 +90,12 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				if ( $file == $plugin && current_user_can( 'manage_options' ) ) {
 					array_push(
 						$links,
-						sprintf( '<a target="_blank" href="%s">' . __( 'Docs & FAQs', 'custom-conditions-for-woocommerce' ) . '</a>', 'https://wordpress.org/support/plugin/custom-conditions-for-woocommerce' )
+						sprintf( '<a target="_blank" href="%s">' . esc_attr__( 'Docs & FAQs', 'custom-conditions-for-woocommerce' ) . '</a>', 'https://wordpress.org/support/plugin/custom-conditions-for-woocommerce' )
 					);
 
 					array_push(
 						$links,
-						sprintf( '<a target="_blank" href="%s">' . __( 'GitHub', 'custom-conditions-for-woocommerce' ) . '</a>', 'https://github.com/mradulovic988/custom-conditions-for-woocommerce' )
+						sprintf( '<a target="_blank" href="%s">' . esc_attr__( 'GitHub', 'custom-conditions-for-woocommerce' ) . '</a>', 'https://github.com/mradulovic988/custom-conditions-for-woocommerce' )
 					);
 				}
 
