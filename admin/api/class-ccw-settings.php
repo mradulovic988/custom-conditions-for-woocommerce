@@ -37,16 +37,16 @@ if ( ! class_exists( 'Ccw_Settings' ) ) {
 		/**
 		 * All types of options fields
 		 *
-		 * @param string $type
-		 * @param string $id
-		 * @param string $class
-		 * @param string $name
-		 * @param string $value
-		 * @param string $placeholder
-		 * @param string $description
-		 * @param string $min
-		 * @param string $max
-		 * @param string $required
+		 * @param string $type Type of field
+		 * @param string $id HTML Id
+		 * @param string $class HTML class
+		 * @param string $name Option name
+		 * @param string $value Input value
+		 * @param string $placeholder Input placeholder
+		 * @param string $description Input description
+		 * @param string $min HTML min
+		 * @param string $max HTML max
+		 * @param string $required If required
 		 */
 		protected function ccw_settings_fields( string $type, string $id, string $class, string $name, string $value, string $placeholder = '', string $description = '', string $min = '', string $max = '', string $required = '' ) {
 			switch ( $type ) {
