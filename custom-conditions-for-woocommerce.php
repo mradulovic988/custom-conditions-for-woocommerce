@@ -11,9 +11,9 @@
  * Plugin Name:       Custom Conditions For WooCommerce
  * Plugin URI:        https://wordpress.org/plugins/custom-conditions-for-woocommerce
  * Description:       If you want quickly to show/hide/rename most of the functionalities in WooCommerce, this is the right plugin.
- * Version:           1.0.0
+ * Version:           1.0.2
  * Requires at least: 4.6
- * Requires PHP:      7.1
+ * Requires PHP:      7.4
  * Author:            Marko Radulovic
  * Author URI:        https://mlab-studio.com
  * Text Domain:       custom-conditions-for-woocommerce

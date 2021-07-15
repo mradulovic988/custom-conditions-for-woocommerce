@@ -1,10 +1,10 @@
 === Custom Conditions For WooCommerce ===
 Contributors: upss1988
-Tags: hide add to cart, hide product prices, hide coupon code, hide tabs, hide checkout fields, show, change name to add to cart, custom conditions for woocommerce conditions
+Tags: add to cart, product prices, coupon code, tabs, checkout fields, hide, conditions, show, change name, checkout fields, remove, add
 Requires at least: 4.6
-Tested up to: 5.7
-Requires PHP: 7.1
-Stable tag: 1.0.0
+Tested up to: 5.8
+Requires PHP: 7.4
+Stable tag: 1.0.2
 Donate link: https://mlab-studio.com
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -70,7 +70,7 @@ Custom Conditions For WooCommerce has your website performance in mind -  every 
 
 = Can I use Custom Conditions For WooCommerce plugin with any WordPress theme? =
 
-Yes. The plugin is fully compatible with every WordPress theme.
+You can use it with any theme, followed by WordPress coding standard since many themes use a custom WooCommerce hooks, and some functionalities from the plugin may not work.
 
 = I don't see the changes for Google prices =
 
