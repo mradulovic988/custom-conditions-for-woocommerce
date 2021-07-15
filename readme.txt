@@ -11,7 +11,7 @@ URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
-If you want to quickly show / hide / rename most of the functionalities in WooCommerce, this is the right plugin for you.
+If you want to quickly show/hide/rename most of the functionalities in WooCommerce, this is the right plugin for you.
 Custom Conditions For WooCommerce is a modern and simple way to change most of the functionalities in WooCommerce.
 
 == 🔥 Features 🔥 ==
@@ -35,8 +35,13 @@ The support is exclusively limited to the wordpress.org support forum.
 
 === 🔝 CODING STANDARDS 🔝 ===
 
-Custom Conditions For WooCommerce is coded with modern PHP, JavaScript and WordPress standards in mind. It’s fully OOP coded.
+Custom Conditions For WooCommerce is coded with modern PHP, JavaScript, and WordPress standards in mind. In addition, it's fully OOP coded.
 Custom Conditions For WooCommerce has your website performance in mind -  every script and style is minified and loaded conditionally.
+
+== 🌟 Check our other plugins 🌟 ==
+
+* [Agy Verification](https://wordpress.org/plugins/agy-verification/)
+* [Custom Conditions for WooCommerce](https://wordpress.org/plugins/custom-conditions-for-woocommerce)
 
 == Installation ==
 
@@ -53,8 +58,8 @@ Custom Conditions For WooCommerce has your website performance in mind -  every 
 * Click the `upload tab`
 * Choose `custom-conditions-for-woocommerce` from your downloads folder
 * Click `Install Now`
-* All done, now just activate the plugin
-* Go to WooCommerce -> Custom Conditions and configure it ( or simply click on Settings )
+* All done, now activate the plugin
+* Go to WooCommerce -> Custom Conditions and configure it ( or click on Settings )
 * Save, and you're all good.
 
 = Old Method =
@@ -69,7 +74,7 @@ Yes. The plugin is fully compatible with every WordPress theme.
 
 = I don't see the changes for Google prices =
 
-That change won't affect your website immediately. It will affect it when Google robots re-crawl your website again. That can take up to 40 days.
+That change won't affect your website immediately. Instead, it will affect it when Google robots re-crawl your website again. That can take up to 40 days.
 
 == Screenshots ==
 
