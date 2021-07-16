@@ -4,7 +4,7 @@ Tags: add to cart, product prices, coupon code, tabs, checkout fields, hide, con
 Requires at least: 4.6
 Tested up to: 5.8
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Donate link: https://mlab-studio.com
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
