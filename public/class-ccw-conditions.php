@@ -13,9 +13,9 @@ include CCW_PLUGIN_PATH . '/public/class-ccw-public.php';
 if ( ! class_exists( 'Ccw_Conditions' ) ) {
 
 	class Ccw_Conditions extends Ccw_Public {
-		public Ccw_Settings $api;
-		public string $style_add_to_cart = '<style>.add_to_cart_button{display:none!important}</style>';
-		public string $style_single_add_to_cart = '<style>.single_add_to_cart_button{display:none!important}</style>';
+		public $api;
+		public $style_add_to_cart = '<style>.add_to_cart_button{display:none!important}</style>';
+		public $style_single_add_to_cart = '<style>.single_add_to_cart_button{display:none!important}</style>';
 
 		public function __construct() {
 			parent::__construct();

@@ -3,8 +3,8 @@ Contributors: upss1988
 Tags: add to cart, product prices, coupon code, tabs, checkout fields, hide, conditions, show, change name, checkout fields, remove, add
 Requires at least: 4.6
 Tested up to: 5.8
-Requires PHP: 7.4
-Stable tag: 1.0.3
+Requires PHP: 7.1
+Stable tag: 1.0.4
 Donate link: https://mlab-studio.com
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -81,6 +81,9 @@ That change won't affect your website immediately. Instead, it will affect it wh
 1. General page settings
 
 == Changelog ==
+
+= [ 1.0.4 ] - 2021.07.27 =
+* Decreased version of PHP
 
 = [ 1.0.3 ] - 2021.07.26 =
 * Compatibility with all of the themes
