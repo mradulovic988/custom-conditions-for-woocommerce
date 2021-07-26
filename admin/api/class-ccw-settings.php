@@ -326,7 +326,7 @@ Email       - billing_email' ) . '</pre>';
 		}
 
 		public function ccw_section_id_string_add_to_cart_archive() {
-			$this->ccw_settings_fields( 'text', 'ccw-string-add-to-cart-archive', 'ccw-settings-field', 'string_add_to_cart_archive', esc_attr__( sanitize_text_field( $this->ccw_options_check( 'string_add_to_cart_archive' ) ) ), __( 'Add to Cart', 'custom-conditions-for-woocommerce' ), );
+			$this->ccw_settings_fields( 'text', 'ccw-string-add-to-cart-archive', 'ccw-settings-field', 'string_add_to_cart_archive', esc_attr__( sanitize_text_field( $this->ccw_options_check( 'string_add_to_cart_archive' ) ) ), __( 'Add to Cart', 'custom-conditions-for-woocommerce' ) );
 		}
 
 		public function ccw_section_id_string_add_to_cart_single() {
