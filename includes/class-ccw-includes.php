@@ -10,10 +10,7 @@
 
 if ( ! class_exists( 'Ccw_Includes' ) ) {
 	class Ccw_Includes {
-
-		public function __construct() {
-			include CCW_PLUGIN_PATH . '/includes/generator/class-ccw-theme-generator.php';
-		}
+		public function __construct() {}
 	}
 
 	new Ccw_Includes();

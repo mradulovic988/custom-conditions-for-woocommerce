@@ -13,6 +13,10 @@ if ( ! class_exists( 'Ccw_Public' ) ) {
 		public function __construct() {
 			include CCW_PLUGIN_PATH . '/public/class-ccw-conditions.php';
 		}
+
+		public function ccw_enqueue_public_styles() {
+			wp_enqueue_style( 'ccw_public_css', plugins_url( '/assets/css/ccw_public_style.css', __FILE__ ) );
+		}
 	}
 
 	new Ccw_Public();

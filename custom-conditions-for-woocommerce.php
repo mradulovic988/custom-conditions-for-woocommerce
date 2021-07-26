@@ -53,7 +53,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					include CCW_PLUGIN_PATH . '/public/class-ccw-public.php';
 					include CCW_PLUGIN_PATH . '/includes/class-ccw-includes.php';
 				}
-
 			}
 
 			public function ccw_load_plugin_textdomain() {

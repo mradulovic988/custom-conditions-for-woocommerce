@@ -9,12 +9,16 @@
  */
 
 include CCW_PLUGIN_PATH . '/admin/api/class-ccw-settings.php';
+include CCW_PLUGIN_PATH . '/public/class-ccw-public.php';
 if ( ! class_exists( 'Ccw_Conditions' ) ) {
 
-	class Ccw_Conditions {
+	class Ccw_Conditions extends Ccw_Public {
 		public Ccw_Settings $api;
+		public string $style_add_to_cart = '<style>.add_to_cart_button{display:none!important}</style>';
+		public string $style_single_add_to_cart = '<style>.single_add_to_cart_button{display:none!important}</style>';
 
 		public function __construct() {
+			parent::__construct();
 			$this->api = new Ccw_Settings();
 
 			add_action( 'template_redirect', array( $this, 'ccw_remove_add_to_cart' ) );
@@ -64,6 +68,11 @@ if ( ! class_exists( 'Ccw_Conditions' ) ) {
 		public function ccw_remove_add_to_cart() {
 			if ( $this->api->ccw_options_check( 'card_button_archive' ) == 1 && is_shop() ) {
 				remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+
+				// If the theme has custom hooks
+				if ( is_shop() ) {
+					echo $this->style_add_to_cart;
+				}
 			}
 		}
 
@@ -73,6 +82,9 @@ if ( ! class_exists( 'Ccw_Conditions' ) ) {
 		public function ccw_remove_add_to_cart_single() {
 			if ( $this->api->ccw_options_check( 'card_button_single' ) == 1 ) {
 				remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+
+				// If the theme has custom hooks
+				echo $this->style_single_add_to_cart;
 			}
 		}
 
@@ -82,7 +94,11 @@ if ( ! class_exists( 'Ccw_Conditions' ) ) {
 		public function ccw_remove_add_to_cart_category() {
 			if ( $this->api->ccw_options_check( 'card_button_category' ) == 1 && is_product_category() ) {
 				remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+
+				// If the theme has custom hooks
+				echo $this->style_add_to_cart;
 			}
+
 		}
 
 		/**

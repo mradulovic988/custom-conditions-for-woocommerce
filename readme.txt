@@ -70,7 +70,7 @@ Custom Conditions For WooCommerce has your website performance in mind -  every 
 
 = Can I use Custom Conditions For WooCommerce plugin with any WordPress theme? =
 
-You can use it with any theme, followed by WordPress coding standard since many themes use a custom WooCommerce hooks, and some functionalities from the plugin may not work.
+Yes, the Custom Conditions for WooCommerce plugin is compatible with all of the themes.
 
 = I don't see the changes for Google prices =
 
@@ -82,8 +82,11 @@ That change won't affect your website immediately. Instead, it will affect it wh
 
 == Changelog ==
 
+= [ 1.0.3 ] - 2021.07.26 =
+* Compatibility with all of the themes
+
 = [ 1.0.0 ] - 2021.07.09 =
 * Plugin created and published
 
 == Upgrade Notice ==
-Plugin created and published
+Tested compatability with all of the themes
